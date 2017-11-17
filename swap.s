@@ -5,6 +5,17 @@ scanmsg: db "%d%d", 0
 printmsg: db "a=%d, b=%d", 10, 0
     section .text
     global main
+swap:
+    push ebp
+    mov ebp, esp
+
+    mov edx, dword [esp + 4]
+    mov edx, eax
+    mov eax, ecx
+    mov ecx, edx
+    
+    pop ebp
+    ret
 main:
     push ebp
     mov ebp, esp
@@ -21,10 +32,10 @@ main:
     pop eax
     pop ecx
 
-    mov edx, dword [esp + 4]
-    mov edx, eax
-    mov eax, ecx
-    mov ecx, edx
+    push ecx
+    push eax
+    call swap
+    add esp, 8   
     
     push ecx
     push eax
