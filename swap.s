@@ -9,7 +9,8 @@ swap:
     push ebp
     mov ebp, esp
 
-    mov edx, dword [esp + 4]
+    mov eax, dword [ebp + 8] ; a
+    mov ecx, dword [ebp + 12] ; b
     mov edx, eax
     mov eax, ecx
     mov ecx, edx
@@ -20,8 +21,8 @@ main:
     push ebp
     mov ebp, esp
 
-    push dword 0
-    push dword 0
+    push dword 0 ; b
+    push dword 0 ; a
     lea eax, [esp + 4]
     push eax
     lea eax, [esp + 4]
@@ -32,8 +33,8 @@ main:
     pop eax
     pop ecx
 
-    push ecx
-    push eax
+    push ecx ; b
+    push eax ; a
     call swap
     add esp, 8   
     
